@@ -24,27 +24,21 @@
       
       computerSelection = computerPlay().toLowerCase();
       if (computerSelection == "rock" && playerSelection == "paper") {
-        playerScore++;
         return("You win! Paper beats rock")
       }
       else if (computerSelection == "scissors" && playerSelection == "paper") {
-        computerScore++;
         return("You lose! Scissors beats paper")
       }
       else if (computerSelection == "scissors" && playerSelection == "rock") {
-        playerScore++;;
         return("You win! Rock beats scissors")
       }
       else if (computerSelection == "paper" && playerSelection == "rock") {
-        computerScore++;
         return("You lose! Paper beats rock")
       }
       else if (computerSelection == "rock" && playerSelection == "scissors") {
-        computerScore++;
         return("You lose! Rock beats scissors")
       }
       else if (computerSelection == "paper" && playerSelection == "scissors") {
-        playerScore++;;
         return("You win! Scissors beats paper")
       }
       else  if (computerSelection == playerSelection){
@@ -74,8 +68,6 @@ let losses = 0;
       }
       console.log("wins: " + wins);
       console.log("losses: " + losses);
-      console.log("wins: " + playerScore);
-      console.log("losses: " + computerScore);
     }
 
     game();
