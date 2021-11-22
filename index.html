@@ -12,9 +12,9 @@
       "Scissors"
     ];
 
-    let wins = 0;
-    let losses = 0;
-    let draws = 0;
+    var wins = 0;
+    var losses = 0;
+    var draws = 0;
 
     function computerPlay() {
         var computerSelection = options[Math.floor(Math.random()*options.length)];
@@ -24,33 +24,33 @@
     function playRound(playerSelection, computerSelection) {
       
       computerSelection = computerPlay().toLowerCase();
-      if (computerSelection == "rock" && playerSelection == "paper") {
+      if (computerSelection === "rock" && playerSelection === "paper") {
+        wins++;
         return("You win! Paper beats rock");
-        wins++;
       }
-      else if (computerSelection == "scissors" && playerSelection == "paper") {
+      else if (computerSelection === "scissors" && playerSelection === "paper") {
+        losses++;
         return("You lose! Scissors beats paper");
-        losses++;
       }
-      else if (computerSelection == "scissors" && playerSelection == "rock") {
-        return("You win! Rock beats scissors");
+      else if (computerSelection === "scissors" && playerSelection === "rock") {
         wins++;
+        return("You win! Rock beats scissors");      
       }
-      else if (computerSelection == "paper" && playerSelection == "rock") {
-        return("You lose! Paper beats rock");
+      else if (computerSelection === "paper" && playerSelection === "rock") {
         losses++;
+        return("You lose! Paper beats rock");       
       }
-      else if (computerSelection == "rock" && playerSelection == "scissors") {
-        return("You lose! Rock beats scissors");
+      else if (computerSelection === "rock" && playerSelection === "scissors") {
         losses++;
+        return("You lose! Rock beats scissors");       
       }
-      else if (computerSelection == "paper" && playerSelection == "scissors") {
-        return("You win! Scissors beats paper");
+      else if (computerSelection === "paper" && playerSelection === "scissors") {
         wins++;
+        return("You win! Scissors beats paper");       
       }
-      else  if (computerSelection == playerSelection){
-        return("Draw!");
+      else  if (computerSelection === playerSelection){
         draws++;
+        return("Draw!");     
       }
       else {
         return("Invalid Input!")
@@ -58,25 +58,22 @@
     }
 
     function game() {
-      let wins = 0;
-      let losses = 0;
-      let draws = 0;
-      
       let playerSelection
       
-      for(r = 1; r <= 5; r++) {
+      while((wins < 5) && (losses < 5)) {
         let computerSelection = computerPlay().toLowerCase()
         playerSelection = prompt("rock, paper, or scissors?").toLowerCase();
         result = playRound(playerSelection, computerSelection);
         console.log(result);
+        console.log("wins: " + wins);
+        console.log("losses: " + losses);
+        console.log("draw: " + draws);
       }
-      console.log("wins: " + wins);
-      console.log("losses: " + losses);
-      console.log("draw: " + draws);
+      
     }
 
     game();
-
+    
   </script>
 </body>
 </html>
