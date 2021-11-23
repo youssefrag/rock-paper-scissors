@@ -5,7 +5,17 @@
   <title>Document</title>
 </head>
 <body>
+  <div id="playerSelectionBtns">
+    <button id="rock" class="button">Rock</button>
+    <button id="paper" class="button">Paper</button>
+    <button id="scissors"class="button">Scissors</button>
+  </div>
+  <div class="results"></div>
+    
+  </div>
+
   <script>
+
     var options = [
       "Rock",
       "Paper",
@@ -15,15 +25,21 @@
     var wins = 0;
     var losses = 0;
     var draws = 0;
+    
+    let playerSelection;
+
+    let computerSelection;
+
+    const results = document.querySelector('.results');
+    
 
     function computerPlay() {
-        var computerSelection = options[Math.floor(Math.random()*options.length)];
-        return computerSelection;
-      }
+      var computerSelection = options[Math.floor(Math.random()*options.length)];
+      return computerSelection;
+    }
 
     function playRound(playerSelection, computerSelection) {
       
-      computerSelection = computerPlay().toLowerCase();
       if (computerSelection === "rock" && playerSelection === "paper") {
         wins++;
         return("You win! Paper beats rock");
@@ -57,23 +73,60 @@
       }
     }
 
-    function game() {
-      let playerSelection
-      
-      while((wins < 5) && (losses < 5)) {
-        let computerSelection = computerPlay().toLowerCase()
-        playerSelection = prompt("rock, paper, or scissors?").toLowerCase();
-        result = playRound(playerSelection, computerSelection);
-        console.log(result);
-        console.log("wins: " + wins);
-        console.log("losses: " + losses);
-        console.log("draw: " + draws);
+
+    function declareWinner() {
+      if(wins === 5){
+        const winnerAnnouncement = document.createElement('h1');
+        winnerAnnouncement.classList.add('winnerAnnouncement');
+        winnerAnnouncement.textContent = 'Congrats! You have won the game.'
+        results.appendChild(winnerAnnouncement);
       }
-      
+      else if(losses === 5){
+        const winnerAnnouncement = document.createElement('h1');
+        winnerAnnouncement.classList.add('winnerAnnouncement');
+        winnerAnnouncement.textContent = 'You have lost the game.'
+        results.appendChild(winnerAnnouncement);
+      }
     }
 
-    game();
+    let buttons = document.querySelectorAll(".button")
     
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        playerSelection = (button.id).toString()
+        computerSelection = computerPlay().toLowerCase().toString();
+        let outcome = playRound(playerSelection, computerSelection);
+
+        
+
+        let selections = "Player: " + playerSelection + ", Computer: " + computerSelection
+
+        const roundSelections = document.createElement('div')
+        roundSelections.classList.add('roundSelections');
+        roundSelections.textContent = selections;
+        results.appendChild(roundSelections);
+
+        const roundOutcome = document.createElement('div');
+        roundOutcome.classList.add('roundOutcome');
+        roundOutcome.textContent = outcome;
+        results.appendChild(roundOutcome);
+
+        let score = "wins: " + wins + ", losses: " + losses;
+
+        const currentScore = document.createElement('div');
+        currentScore.classList.add('currentScore');
+        currentScore.textContent = score
+        results.appendChild(currentScore);
+
+        if( wins === 5 || losses ===5){
+          declareWinner()
+          wins = 0;
+          losses = 0;
+          draws = 0;
+        }
+      })
+    })
+
   </script>
 </body>
 </html>
