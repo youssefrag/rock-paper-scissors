@@ -29,8 +29,6 @@
     let playerSelection;
 
     let computerSelection;
-
-    const results = document.querySelector('.results');
     
 
     function computerPlay() {
@@ -73,6 +71,7 @@
       }
     }
 
+    const results = document.querySelector('.results');
 
     function declareWinner() {
       if(wins === 5){
@@ -123,9 +122,20 @@
           wins = 0;
           losses = 0;
           draws = 0;
+
+          const nl = document.getElementsByClassName('currentScore')
+          let oldScores = Array.from(nl)
+
+          for(i = 0; i < i < oldScores.length ; i++) {
+            results.removeChild(oldScores[i]);
+          }
+
+          console.log(oldScores)
         }
       })
     })
+    
+    // test test
 
   </script>
 </body>
